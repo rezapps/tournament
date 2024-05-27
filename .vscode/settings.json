@@ -1,0 +1,68 @@
+{
+    "workbench.startupEditor": "none",
+    "security.workspace.trust.untrustedFiles": "open",
+    "explorer.confirmDelete": false,
+    "terminal.integrated.defaultProfile.windows": "Cmder",
+    "editor.fontLigatures": false,
+    "git.enableSmartCommit": true,
+    "workbench.colorTheme": "Evondev Dracula New Colour",
+    "editor.minimap.enabled": false,
+    "explorer.confirmDragAndDrop": false,
+    "editor.detectIndentation": false,
+    "files.eol": "\n",
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "security.allowedUNCHosts": [
+        "wsl.localhost",
+        "JONACLOUD"
+    ],
+    "aws.telemetry": false,
+    "aws.suppressPrompts": {
+        "codeWhispererNewWelcomeMessage": true,
+        "codeWhispererConnectionExpired": true
+    },
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "window.zoomLevel": 1,
+    "editor.fontSize": 12,
+    "liveServer.settings.donotShowInfoMsg": true,
+    "git.openRepositoryInParentFolders": "always",
+    "explorer.confirmPasteNative": false,
+    "codeium.enableCodeLens": false,
+    "remote.autoForwardPortsSource": "hybrid",
+    "workbench.settings.applyToAllProfiles": [
+        "github.gitProtocol",
+        "terminal.integrated.defaultProfile.windows"
+    ],
+    "github.gitProtocol": "ssh",
+    "grunt.autoDetect": "on",
+    "terminal.integrated.fontFamily": "FiraCode Nerd Font Mono",
+    "workbench.editorAssociations": {
+        "*.db": "sqlite-viewer.option"
+    },
+    "terminal.integrated.enableMultiLinePasteWarning": true,
+    "mssql.enableQueryHistoryCapture": false,
+    "terminal.integrated.tabs.defaultColor": "terminal.ansiCyan",
+    "terminal.integrated.tabs.defaultIcon": "coffee",
+    "amazonQ.telemetry": false,
+    "codeium.enableConfig": {
+        "*": true,
+        "aspnetcorerazor": true,
+        "xml": true
+    },
+    "files.exclude": {
+        ".vscode": true,
+        "*.mdf *.ldf": true,
+        "*.secrets web.config": true,
+        "*~ *.tmp *.userstate": true,
+        "/obj/ /bin/ *.suo *.user *.vbproj *.csproj *.fslproj .mono": true,
+        "/Properties/ /Release/ /Debug/": true,
+        "/TestResults/ /coverage/": true
+    },
+    "workbench.sideBar.location": "right",
+    "terminal.integrated.fontSize": 12,
+    "terminal.integrated.defaultProfile.osx": "",
+    "dataworkspace.excludedProjects": [
+        "tournament/tournament.sqlproj"
+    ]
+}

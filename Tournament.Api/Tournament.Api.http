@@ -1,0 +1,14 @@
+
+POST http://localhost:5006/api/Games
+Content-Type: application/json
+
+{
+    "Title": "Test Game",
+    "Time": "2024-06-06",
+    "TournamentId": 1,
+}
+
+###
+
+Get http://localhost:5006/api/Games/1
+Accept: application/json
