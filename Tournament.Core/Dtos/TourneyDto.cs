@@ -7,7 +7,7 @@ namespace Tournament.Core.Dtos
 {
     public class TourneyDto
     {
-        public string Title { get; set; } = default!;
+        public string Title { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate => StartDate.AddMonths(3);
 

@@ -8,66 +8,47 @@ namespace Tournament.Data.Repositories
     public class TourneyRepository : ITourneyRepository
     {
         // Properties
-        private readonly TournamentContext _context;
+         private readonly TournamentContext _context;
 
-        // Constructor
-        public TourneyRepository(TournamentContext tournamentContext)
+        public TourneyRepository(TournamentContext context)
         {
-            _context = tournamentContext;
+            _context = context;
         }
 
-        // Check if Tourney exists
-        public async Task<bool> AnyAsync(int tourneyId)
-        {
-            return await _context.Tourney.AnyAsync(g => g.Id == tourneyId);
-        }
-
-        // Get all Tourneys
         public async Task<List<Tourney>> GetAllAsync()
         {
             return await _context.Tourney.ToListAsync();
         }
 
-        // Get Tourney by id
-        public async Task<Tourney> GetAsync(int tourneyId)
+        public async Task<Tourney> GetAsync(int id)
         {
-            return await _context.Tourney
-                .FindAsync(tourneyId)
-                ?? throw new KeyNotFoundException($"Tourney with ID {tourneyId} not found.");
+            return await _context.Tourney.FindAsync(id);
         }
 
-        // Add Tourney
-        public void Add(Tourney Tourney)
+        public async Task<bool> AnyAsync(int id)
         {
-            if (Tourney == null)
-            {
-                throw new ArgumentNullException(nameof(Tourney));
-            }
-
-            _context.Tourney.Add(Tourney);
+            return await _context.Tourney.AnyAsync(g => g.Id == id);
         }
 
-        // Remove Tourney
-        public async void RemoveAsync(Tourney Tourney)
+        public void Add(Tourney tourney)
         {
-            if (Tourney == null)
+            if (tourney == null)
             {
-                throw new ArgumentNullException(nameof(Tourney));
+                throw new ArgumentNullException(nameof(tourney));
             }
 
-            _context.Tourney.Remove(Tourney);
+            _context.Tourney.Add(tourney);
+        }
+
+        public async Task UpdateAsync(Tourney tourney)
+        {
+            _context.Entry(tourney).State = EntityState.Modified;
             await _context.SaveChangesAsync();
         }
 
-        // Update Tourney
-        public async void UpdateAsync(Tourney Tourney)
+        public async Task RemoveAsync(Tourney tourney)
         {
-            if (Tourney == null)
-            {
-                throw new ArgumentNullException(nameof(Tourney));
-            }
-
-            _context.Tourney.Update(Tourney);
+            _context.Tourney.Remove(tourney);
             await _context.SaveChangesAsync();
         }
     }

@@ -10,5 +10,35 @@ Content-Type: application/json
 
 ###
 
-Get http://localhost:5006/api/Games/1
+Get http://localhost:5006/api/Games/2
+Accept: application/json
+
+
+
+###
+
+Get http://localhost:5006/api/Games
+Accept: application/json
+
+###
+
+
+POST http://localhost:5006/api/Tourneys
+Content-Type: application/json
+
+{
+    "Title": "Test Tournament",
+    "StartDate": "2024-06-06"
+}
+
+###
+
+Get http://localhost:5006/api/Tourneys/1
+Accept: application/json
+
+
+
+###
+
+Get http://localhost:5006/api/Tourneys
 Accept: application/json

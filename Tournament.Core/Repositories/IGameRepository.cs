@@ -8,11 +8,11 @@ namespace Tournament.Core.Repositories
 {
     public interface IGameRepository
     {
-        Task<List<Game>> GetAllAsync(); 
+        Task<List<Game>> GetAllAsync();
         Task<Game> GetAsync(int id);
-        Task<bool> AnyAsync(int id); 
-        void Add(Game game); 
-        void UpdateAsync(Game game); 
-        void RemoveAsync(Game game); 
+        Task<bool> AnyAsync(int id);
+        void Add(Game game);
+        Task UpdateAsync(Game game);
+        Task RemoveAsync(Game game);
     }
 }

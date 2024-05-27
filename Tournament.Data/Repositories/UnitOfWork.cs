@@ -1,30 +1,43 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Tournament.Core.Repositories;
 using Tournament.Data.Data;
-using Tournament.Core.Entities;
-
 
 namespace Tournament.Data.Repositories
 {
-    public class UnitOfWork : IUnitOfWork
+    public class UnitOfWork : IUnitOfWork, IDisposable
     {
         private readonly TournamentContext _context;
-        private readonly IGameRepository _game;
-        private readonly ITourneyRepository _tourney;
+        private IGameRepository _gameRepository;
+        private ITourneyRepository _tourneyRepository;
 
-        public UnitOfWork(TournamentContext context, IGameRepository game, ITourneyRepository tourney)
+        public UnitOfWork(TournamentContext context)
         {
             _context = context;
-            _game = game;
-            _tourney = tourney;
         }
-        public IGameRepository Game => _game;
-        public ITourneyRepository Tourney => _tourney;
 
-        // expression body
+        public IGameRepository Game => _gameRepository ??= new GameRepository(_context);
+        public ITourneyRepository Tourney => _tourneyRepository ??= new TourneyRepository(_context);
+
         public async Task<int> SaveChangesAsync() => await _context.SaveChangesAsync();
+
+        private bool _disposed = false;
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposed)
+            {
+                if (disposing)
+                {
+                    _context.Dispose();
+                }
+            }
+            _disposed = true;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
     }
 }

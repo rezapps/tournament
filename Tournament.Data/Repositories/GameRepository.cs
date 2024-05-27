@@ -1,3 +1,7 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Tournament.Core.Entities;
 using Tournament.Core.Repositories;
@@ -7,36 +11,28 @@ namespace Tournament.Data.Repositories
 {
     public class GameRepository : IGameRepository
     {
-        // Properties
         private readonly TournamentContext _context;
 
-        // Constructor
-        public GameRepository(TournamentContext tournamentContext)
+        public GameRepository(TournamentContext context)
         {
-            _context = tournamentContext;
+            _context = context;
         }
 
-        // Check if game exists
-        public async Task<bool> AnyAsync(int gameId)
-        {
-            return await _context.Game.AnyAsync(g => g.Id == gameId);
-        }
-
-        // Get all games
         public async Task<List<Game>> GetAllAsync()
         {
             return await _context.Game.ToListAsync();
         }
 
-        // Get game by id
-        public async Task<Game> GetAsync(int gameId)
+        public async Task<Game> GetAsync(int id)
         {
-            return await _context.Game
-                .FindAsync(gameId)
-                ?? throw new KeyNotFoundException($"Game with ID {gameId} not found.");
+            return await _context.Game.FindAsync(id);
         }
 
-        // Add game
+        public async Task<bool> AnyAsync(int id)
+        {
+            return await _context.Game.AnyAsync(g => g.Id == id);
+        }
+
         public void Add(Game game)
         {
             if (game == null)
@@ -47,27 +43,15 @@ namespace Tournament.Data.Repositories
             _context.Game.Add(game);
         }
 
-        // Remove game
-        public async void RemoveAsync(Game game)
+        public async Task UpdateAsync(Game game)
         {
-            if (game == null)
-            {
-                throw new ArgumentNullException(nameof(game));
-            }
-
-            _context.Game.Remove(game);
+            _context.Entry(game).State = EntityState.Modified;
             await _context.SaveChangesAsync();
         }
 
-        // Update game
-        public async void UpdateAsync(Game game)
+        public async Task RemoveAsync(Game game)
         {
-            if (game == null)
-            {
-                throw new ArgumentNullException(nameof(game));
-            }
-
-            _context.Game.Update(game);
+            _context.Game.Remove(game);
             await _context.SaveChangesAsync();
         }
     }

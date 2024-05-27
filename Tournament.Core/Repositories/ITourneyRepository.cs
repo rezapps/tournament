@@ -8,11 +8,11 @@ namespace Tournament.Core.Repositories
 {
     public interface ITourneyRepository
     {
-        Task<List<Tourney>> GetAllAsync(); 
+        Task<List<Tourney>> GetAllAsync();
         Task<Tourney> GetAsync(int id);
-        Task<bool> AnyAsync(int id); 
-        void Add(Tourney tourney); 
-        void UpdateAsync(Tourney tourney); 
-        void RemoveAsync(Tourney tourney); 
+        Task<bool> AnyAsync(int id);
+        void Add(Tourney tourney);
+        Task UpdateAsync(Tourney tourney);
+        Task RemoveAsync(Tourney tourney);
     }
 }
