@@ -4,6 +4,7 @@ using Tournament.Core.Repositories;
 using Tournament.Data.Data;
 using Tournament.Data.Repositories;
 using Tournament.Data;
+using Tournament.Api.Extensions;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,7 +25,14 @@ builder.Services.AddScoped<IGameRepository, GameRepository>();
 builder.Services.AddScoped<ITourneyRepository, TourneyRepository>();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddAutoMapper(typeof(TournamentMappings)); 
+builder.Services.AddAutoMapper(typeof(TournamentMappings));
+
+
+// Seed the database
+using var serviceProvider = builder.Services.BuildServiceProvider();
+using var scope = serviceProvider.CreateScope();
+var context = scope.ServiceProvider.GetService<TournamentContext>();
+context.SeedData();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
