@@ -20,8 +20,10 @@ builder.Services.AddDbContext<TournamentContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Register services for Repositories
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IGameRepository, GameRepository>();
 builder.Services.AddScoped<ITourneyRepository, TourneyRepository>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 builder.Services.AddAutoMapper(typeof(TournamentMappings)); 
 
